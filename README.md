@@ -3,12 +3,12 @@ A simple command-line To Do List.
 
 ---
 
-`add "msg"` - Add a to-do.
-`list` - List all to-dos.
-`check <n>`  - Check a to-do off.
-`uncheck <n>` - Uncheck a to-do.
-`delete <N>` - Delete a to-do.
-`clean` - Remove all checked to-dos.
+`add "msg"` - Add a to-do.  
+`list` - List all to-dos.  
+`check <n>`  - Check a to-do off.  
+`uncheck <n>` - Uncheck a to-do.  
+`delete <N>` - Delete a to-do.  
+`clean` - Remove all checked to-dos.  
 
 ---
 
