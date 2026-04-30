@@ -7,7 +7,7 @@ A simple command-line To Do List.
 `list` - List all to-dos.  
 `check <n>`  - Check a to-do off.  
 `uncheck <n>` - Uncheck a to-do.  
-`delete <N>` - Delete a to-do.  
+`delete <n>` - Delete a to-do.  
 `clean` - Remove all checked to-dos.  
 
 ---
