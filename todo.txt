@@ -1,0 +1,6 @@
+[ ] Commit to HSBA
+[ ] Add undo n redo
+[ ] check full screen mode
+[ ] improve palette help doc
+[ ] fix modifider bugouts
+[ ] disable line when dragging existing points
