@@ -1,20 +1,20 @@
 touch todo.txt
 
 if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
-	echo "[ ] $2" >> todo.txt
+	echo "\033[2m[ ]\033[0m $2" >> todo.txt
 	echo "[+] Added at line "
 	wc -l < todo.txt 
 
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
-	printf "\n  \033[33m---\033[93m To Do \033[33m---\033[0m\n"
+	printf "\n\033[33m- - -\033[93m To Do \033[33m- - -\033[0m\n"
 	nl -w 2 -s '  ' todo.txt
 	echo ""
 
 elif [ "$1" = "check" -o "$1" = "done" ]; then
-	sed -i '' "$2s/[ \]]/x\]/" todo.txt
+	sed -i '' "$2s/\[ ]/[x]/g" todo.txt
 	echo "[x] Checked #$2"
 elif [ "$1" = "uncheck"  -o "$1" = "undone" ]; then
-	sed -i '' "$2s/[x\]]/ \]/" todo.txt
+	sed -i '' "$2s/\[x]/[ ]/g" todo.txt
 	echo "[ ] Unchecked #$2"
 
 elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
@@ -24,7 +24,6 @@ elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
 elif [ "$1" = "clean" ]; then
 	sed -i '' "/x\]/d" todo.txt
 	echo "    Cleaned checked todos"
-
 
 else
 	echo "Commands are add, delete, check, uncheck, see, clean."
