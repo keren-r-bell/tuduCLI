@@ -1,13 +1,22 @@
 touch todo.txt
 
 if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
-	echo "\033[2m[ ]\033[0m $2" >> todo.txt
+	echo "\[ ] $2" >> todo.txt
 	echo "[+] Added at line "
 	wc -l < todo.txt 
 
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	printf "\n\033[33m- - -\033[93m To Do \033[33m- - -\033[0m\n"
-	nl -w 2 -s '  ' todo.txt
+	if [ "$2" = "-s" ]; then
+		nl -w 2 -s '  ' todo.txt | grep "\[ "
+		echo "\033[2m- - - - -"
+		nl -w 2 -s '  ' todo.txt | grep "\[x"
+		printf "\033[0m"
+	elif [ "$2" = "-u" -o "$2" = "--unchecked" ]; then
+		nl -w 2 -s '  ' todo.txt | grep "\[ "
+	else
+		nl -w 2 -s '  ' todo.txt
+	fi
 	echo ""
 
 elif [ "$1" = "check" -o "$1" = "done" ]; then
