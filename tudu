@@ -16,9 +16,9 @@ if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	printf "\n\033[33m- - -\033[93m To Do \033[33m- - -\033[0m\n"
 	if [ "$2" = "-s" ]; then
-		sed -n '/^\[ \]/p' todo.txt | nl -w 2 -s '  '
+		nl -w 2 -s '  ' todo.txt | sed -n '/\[ \]/p'
 		echo "\033[2m- - - - -"
-		sed -n '/^\[x\]/p' todo.txt | nl -w 2 -s '  '
+		nl -w 2 -s '  ' todo.txt | sed -n '/\[x\]/p'
 		printf "\033[0m"
 	elif [ "$2" = "-u" -o "$2" = "--unchecked" ]; then
 		nl -w 2 -s '  ' todo.txt | grep "\[ "
