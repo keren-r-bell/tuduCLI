@@ -1,6 +1,7 @@
 # tudu
 A simple command-line To Do List.  
-
+I am under no illusion this is an indepth CLI app: This is meant as a simple, natural-to-use (and learn) utility and a coding practice for myself.  
+  
 ## Commands
   
 `add "Description"` - Add a to-do.  (Optionally `-i`nsert at line number)  
