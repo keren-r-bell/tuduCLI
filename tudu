@@ -6,11 +6,10 @@ if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 		echo "[ ] $4" >> /tmp/tudu_temp
 		sed -n "$((${3}+1)),\$p" todo.txt >> /tmp/tudu_temp
 		mv /tmp/tudu_temp todo.txt
-		echo "[+] Added after line $3"
+		echo "[ ] Added #$((${3}+1))"
 	else
 		echo "[ ] $2" >> todo.txt
-		echo "[+] Added at line "
-		wc -l < todo.txt 
+		echo "[ ] Added #$(wc -l < todo.txt | tr -d ' ')"
 	fi
 
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
@@ -28,10 +27,10 @@ elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	echo ""
 
 elif [ "$1" = "check" -o "$1" = "done" ]; then
-	sed -i '' "$2s/\[ ]/[x]/g" todo.txt
+	sed -i '' "$2s/\[ ]/\[x]/" todo.txt
 	echo "[x] Checked #$2"
 elif [ "$1" = "uncheck"  -o "$1" = "undone" ]; then
-	sed -i '' "$2s/\[x]/[ ]/g" todo.txt
+	sed -i '' "$2s/\[x]/\[ ]/" todo.txt
 	echo "[ ] Unchecked #$2"
 
 elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
@@ -39,7 +38,7 @@ elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
 	echo "    Deleted #$2"
 
 elif [ "$1" = "clean" ]; then
-	sed -i '' "/x\]/d" todo.txt
+	sed -i '' "/\[x]/d" todo.txt
 	echo "    Cleaned checked todos"
 
 else
