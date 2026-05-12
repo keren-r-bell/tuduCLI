@@ -42,5 +42,5 @@ elif [ "$1" = "clean" ]; then
 	echo "    Cleaned checked todos"
 
 else
-	echo "\033[93mTudu\033[0m Commands are see (/-s /-u), add, delete, check, uncheck, clean."
+	echo "\033[93mTudu\033[0m Commands are see (/-s /-u), add (/-i), delete, check, uncheck, clean."
 fi
