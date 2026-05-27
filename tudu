@@ -2,12 +2,14 @@ touch todo.txt
 
 if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 	if [ "$2" = "-i" -o "$2" = "--insert" ]; then
+		# Insert at specific line
 		sed -n "1,${3}p" todo.txt > /tmp/tudu_temp
 		echo "[ ] $4" >> /tmp/tudu_temp
 		sed -n "$((${3}+1)),\$p" todo.txt >> /tmp/tudu_temp
 		mv /tmp/tudu_temp todo.txt
 		echo "[ ] Added #$((${3}+1))"
 	else
+		# Insert at the end
 		echo "[ ] $2" >> todo.txt
 		echo "[ ] Added #$(wc -l < todo.txt | tr -d ' ')"
 	fi
@@ -15,32 +17,43 @@ if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	printf "\n\033[33m- - -\033[93m To Do \033[33m- - -\033[0m\n"
 	if [ "$2" = "-s" ]; then
+		# List sorted by Unchecked then Checked
 		nl -w 2 -s '  ' todo.txt | sed -n '/\[ \]/p'
 		echo "\033[2m- - - - -"
 		nl -w 2 -s '  ' todo.txt | sed -n '/\[x\]/p'
 		printf "\033[0m"
 	elif [ "$2" = "-u" -o "$2" = "--unchecked" ]; then
+		# List, filtered to Unchecked
 		nl -w 2 -s '  ' todo.txt | grep "\[ "
 	else
+		# List, in order.
+		# TODO: Colorize Checked rows!
 		nl -w 2 -s '  ' todo.txt
 	fi
 	echo ""
 
 elif [ "$1" = "check" -o "$1" = "done" ]; then
+	# Check specific Todo by Number
 	sed -i '' "$2s/\[ ]/\[x]/" todo.txt
 	echo "[x] Checked #$2"
 elif [ "$1" = "uncheck"  -o "$1" = "undone" ]; then
+	# Uncheck specific Todo by Number
 	sed -i '' "$2s/\[x]/\[ ]/" todo.txt
 	echo "[ ] Unchecked #$2"
 
+# TO MAYBE DO: Non-deterministic toggle keyword?
+
 elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
+	# Delete Todo  permanently by Number
 	sed -i '' "$2d" todo.txt
 	echo "    Deleted #$2"
 
 elif [ "$1" = "clean" ]; then
+	# Delete all checked Todos permanently
 	sed -i '' "/\[x]/d" todo.txt
 	echo "    Cleaned checked todos"
 
 else
+	# Given no arguments, explain possible commands
 	echo "\033[93mTudu\033[0m Commands are see (/-s /-u), add (/-i), delete, check, uncheck, clean."
 fi
