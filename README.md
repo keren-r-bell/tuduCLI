@@ -13,7 +13,7 @@ I am under no illusion this is an indepth CLI app: This is meant as a simple, na
 
 
 ## Issues:
-- [ ] Dim checked to-dos in default `see` list
+- [x] Dim checked to-dos in default `see` list
 - [ ] Remove/Check by Line Contents
 - [ ] Single command to check/uncheck?
 - [x] Insert at specific point

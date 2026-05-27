@@ -28,7 +28,7 @@ elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	else
 		# List, in order.
 		# TODO: Colorize Checked rows!
-		nl -w 2 -s '  ' todo.txt
+		nl -w 2 -s '  ' todo.txt | awk '/\[x\]/ {printf "\033[2m%s\033[0m\n", $0; next} {print}'
 	fi
 	echo ""
 
