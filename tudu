@@ -2,12 +2,12 @@ touch todo.txt
 
 if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 	if [ "$2" = "-i" -o "$2" = "--insert" ]; then
-		# Insert at specific line
+		# Insert after  specific line
 		sed -n "1,${3}p" todo.txt > /tmp/tudu_temp
 		echo "[ ] $4" >> /tmp/tudu_temp
 		sed -n "$((${3}+1)),\$p" todo.txt >> /tmp/tudu_temp
 		mv /tmp/tudu_temp todo.txt
-		echo "[ ] Added #$((${3}+1))"
+		echo "[ ] Added after #${3}"
 	else
 		# Insert at the end
 		echo "[ ] $2" >> todo.txt
@@ -27,26 +27,37 @@ elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 		nl -w 2 -s '  ' todo.txt | grep "\[ "
 	else
 		# List, in order.
-		# TODO: Colorize Checked rows!
 		nl -w 2 -s '  ' todo.txt | awk '/\[x\]/ {printf "\033[2m%s\033[0m\n", $0; next} {print}'
 	fi
 	echo ""
 
-elif [ "$1" = "check" -o "$1" = "done" ]; then
+elif [ "$1" = "check" -o "$1" = "done" -o "$1" = "do" ]; then
 	# Check specific Todo by Number
-	sed -i '' "$2s/\[ ]/\[x]/" todo.txt
-	echo "[x] Checked #$2"
-elif [ "$1" = "uncheck"  -o "$1" = "undone" ]; then
+	if [ -z "$2" ]; then
+		echo "Please specify Todo number to $1."
+	else
+		sed -i '' "$2s/\[ ]/\[x]/" todo.txt
+		echo "[x] Checked #$2"
+	fi
+elif [ "$1" = "uncheck"  -o "$1" = "undone" -o "$1" = "undo" ]; then
 	# Uncheck specific Todo by Number
-	sed -i '' "$2s/\[x]/\[ ]/" todo.txt
-	echo "[ ] Unchecked #$2"
+	if [ -z "$2" ]; then
+                echo "Please specify Todo number to $1."
+        else
+		sed -i '' "$2s/\[x]/\[ ]/" todo.txt
+		echo "[ ] Unchecked #$2"
+	fi
 
 # TO MAYBE DO: Non-deterministic toggle keyword?
 
 elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
 	# Delete Todo  permanently by Number
-	sed -i '' "$2d" todo.txt
-	echo "    Deleted #$2"
+	if [ -z "$2" ]; then
+		echo "Please specify Todo number to $1."
+	else
+		sed -i '' "$2d" todo.txt
+		echo "    Deleted #$2"
+	fi
 
 elif [ "$1" = "clean" ]; then
 	# Delete all checked Todos permanently
