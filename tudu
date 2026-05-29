@@ -7,11 +7,11 @@ if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 		echo "[ ] $4" >> /tmp/tudu_temp
 		sed -n "$((${3}+1)),\$p" todo.txt >> /tmp/tudu_temp
 		mv /tmp/tudu_temp todo.txt
-		echo "[ ] Added after #${3}"
+		echo "\033[93m[ ]\033[0m Added after #${3}"
 	else
 		# Insert at the end
 		echo "[ ] $2" >> todo.txt
-		echo "[ ] Added #$(wc -l < todo.txt | tr -d ' ')"
+		echo "\033[93m[ ]\033[0m Added #$(wc -l < todo.txt | tr -d ' ')"
 	fi
 
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
@@ -37,7 +37,7 @@ elif [ "$1" = "check" -o "$1" = "done" -o "$1" = "do" ]; then
 		echo "Please specify Todo number to $1."
 	else
 		sed -i '' "$2s/\[ ]/\[x]/" todo.txt
-		echo "[x] Checked #$2"
+		echo "\033[93m[x]\033[0m Checked #$2"
 	fi
 elif [ "$1" = "uncheck"  -o "$1" = "undone" -o "$1" = "undo" ]; then
 	# Uncheck specific Todo by Number
@@ -45,7 +45,7 @@ elif [ "$1" = "uncheck"  -o "$1" = "undone" -o "$1" = "undo" ]; then
                 echo "Please specify Todo number to $1."
         else
 		sed -i '' "$2s/\[x]/\[ ]/" todo.txt
-		echo "[ ] Unchecked #$2"
+		echo "\033[93m[ ]\033[0m Unchecked #$2"
 	fi
 
 # TO MAYBE DO: Non-deterministic toggle keyword?
