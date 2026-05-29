@@ -16,7 +16,7 @@ if [ "$1" = "add" -o "$1" = "new" -o "$1" = "create" ]; then
 
 elif [ "$1" = "see" -o "$1" = "look" -o "$1" = "list" ]; then
 	printf "\n\033[33m- - -\033[93m To Do \033[33m- - -\033[0m\n"
-	if [ "$2" = "-s" ]; then
+	if [ "$2" = "-s" -o "$2" = "--sorted" -o "$2" = "-o" -o "$2" = "--ordered" ]; then
 		# List sorted by Unchecked then Checked
 		nl -w 2 -s '  ' todo.txt | sed -n '/\[ \]/p'
 		echo "\033[2m- - - - -"
@@ -51,7 +51,7 @@ elif [ "$1" = "uncheck"  -o "$1" = "undone" -o "$1" = "undo" ]; then
 #elif [ "$1" = "toggle" -o "$1" = "switch" ]; then
 	# Toggle check of specific Todo by number
 	# This doesn't actually make sense as a textwise function, only as a self-swapping GUI button!
-	if [ -z "$2" ]; then
+#	if [ -z "$2" ]; then
 #		echo "Please specify Todo number to $1."
 #	else
 #		echo "To be figured out"
@@ -73,5 +73,5 @@ elif [ "$1" = "clean" ]; then
 
 else
 	# Given no arguments, explain possible commands
-	echo "\033[93mTudu\033[0m Commands are see (/-s /-u), add (/-i), delete, check, uncheck, clean."
+	echo 	"\033[93mTudu\033[0m commands are add \033[2m(/-i)\033[0m, see \033[2m(/-s /-u)\033[0m, delete, check, uncheck, clean."
 fi
