@@ -48,7 +48,14 @@ elif [ "$1" = "uncheck"  -o "$1" = "undone" -o "$1" = "undo" ]; then
 		echo "\033[93m[ ]\033[0m Unchecked #$2"
 	fi
 
-# TO MAYBE DO: Non-deterministic toggle keyword?
+#elif [ "$1" = "toggle" -o "$1" = "switch" ]; then
+	# Toggle check of specific Todo by number
+	# This doesn't actually make sense as a textwise function, only as a self-swapping GUI button!
+	if [ -z "$2" ]; then
+#		echo "Please specify Todo number to $1."
+#	else
+#		echo "To be figured out"
+#	fi
 
 elif [ "$1" = "delete"  -o "$1" = "remove" ]; then
 	# Delete Todo  permanently by Number
