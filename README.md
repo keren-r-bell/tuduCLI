@@ -15,6 +15,9 @@ I am under no illusion this is an indepth CLI app: This is meant as a simple, na
 ## Issues:
 - [x] Dim checked to-dos in default `see` list
 - [ ] Remove/Check by Line Contents
-- [ ] Single command to check/uncheck?
+- [x] ~~Single command to check/uncheck?~~ Not intuitive via text - scrapped!
 - [x] Insert at specific point
 - [x] List that sorts Unchecked above Checked
+- [ ] Add a confirm step before `clean`
+- [ ] Simple marker for Priority tasks with !, possibly. Probably not.
+- [ ] New command to `swap` two to-dos by their number
